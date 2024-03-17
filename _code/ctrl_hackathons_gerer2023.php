@@ -113,7 +113,7 @@ else if ($selectUpdateHackathon == True) {
 
 // ---------------------------------------------------------------------------
 // cas général
-$hackathons = selectHackathons($bdd); // $hackathons: c'est une liste d'objets de la classe hHackathon
+$hackathons = selectHackathons2023($bdd); // $hackathons: c'est une liste d'objets de la classe hHackathon
 debug($hackathons, 'hackathons');
 
 // ---------------------------------------------------------------------------
