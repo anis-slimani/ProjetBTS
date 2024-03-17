@@ -1,6 +1,6 @@
 <?php
 $debug_on = false; // mode debug à false
-$debug_ec_on = true; // mode debug en cours à true
+$debug_ec_on = false; // mode debug en cours à true
 $debug_get_post_on = true; // mode debug à true
 
 /* Commentaires "standards"

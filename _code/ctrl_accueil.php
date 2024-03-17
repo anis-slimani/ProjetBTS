@@ -37,10 +37,12 @@ if(
 // cas général
 // on sélectionnera le ou les hackathons en cours
 // et peut-être les projet
+$hackathons = selectHackathonsToday($bdd); 
 
 // ---------------------------------------------------------------------------
 // Vue : afficher les résultats ----------------------------------------------
 // ---------------------------------------------------------------------------
 debug_get_post();
 debug('<hr>', '<hr>'); // pour séparer les debug de la page html
-include("./views/pages/view_accueil.php");
+
+include_once("./views/pages/view_accueil.php");

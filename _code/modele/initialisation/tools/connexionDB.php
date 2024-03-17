@@ -2,7 +2,7 @@
 // Paramètres pour la BD : à mettre à jour selon les cas
 $dbname_global = 'HackathonsFW';
 $username_global = 'root';
-$password_global = 'root';
+$password_global = '';
 
 /* Commentaires "standards"
 	*	Ce que fait la fonction : 

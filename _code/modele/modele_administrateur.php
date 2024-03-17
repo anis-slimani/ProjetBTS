@@ -42,3 +42,4 @@ function selectAdministrateurConnected($bdd, $loginAdministrateur, $passwordAdmi
    // 4 : on return le résultat
    return $administrateur;
 }
+

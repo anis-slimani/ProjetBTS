@@ -2,6 +2,9 @@
    <li><a href="./ctrl_accueil.php">Accueil admin</a></li>
    <li><a href="./ctrl_hackathons_gerer.php">Gérer Hackathons</a></li>
    <li><a href="./ctrl_projets_gerer.php">Gérer Projet</a></li>
+   <li><a href="./ctrl_hackathons_gerer2023.php">Gérer Hackathons 2023</a></li>
+
+   
 </ul>
 <div>
    <form action="appel_ctrl_deconnexion.php" method="POST">

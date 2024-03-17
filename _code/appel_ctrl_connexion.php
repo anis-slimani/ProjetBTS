@@ -10,6 +10,7 @@ include("./modele/initialisation/initialisation.php");
 include("./modele/modele_administrateur.php");
 include("./modele/modele_jury.php");
 include("./modele/modele_participant.php");
+include("./modele/modele_hackathon.php");
 
 // ---------------------------------------------------------------------------
 // Modèle général SESSION : initialiser la SESSION 
@@ -79,7 +80,7 @@ if ($okDeconnexion == True) {
    $_SESSION["messageErreur"] = "";
 }
 
-
+$hackathons = selectHackathonsToday($bdd);
 // ---------------------------------------------------------------------------
 // Vue : afficher les résultats ----------------------------------------------
 // ---------------------------------------------------------------------------

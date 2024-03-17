@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------------------
 // Modèle général : initialisation
 include("./modele/initialisation/initialisation.php");
+include("./modele/modele_hackathon.php");
 
 // ---------------------------------------------------------------------------
 // Modèle spécifique : je charge les outils pour mon controleur
@@ -32,9 +33,11 @@ $_SESSION = array(); // on vide la SESSION
 $_SESSION["typeUser"] = "public"; // on repart sur public
 $_SESSION["messageErreur"] = ""; 
 
+$hackathons = selectHackathonsToday($bdd);
 // ---------------------------------------------------------------------------
 // Vue : afficher les résultats ----------------------------------------------
 // ---------------------------------------------------------------------------
 debug_get_post();
+
 debug('<hr>', '<hr>'); // pour séparer les debug de la page html
 include("./views/pages/view_accueil.php");

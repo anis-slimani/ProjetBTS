@@ -18,9 +18,7 @@ CREATE TABLE Hackathons(
 function selectHackathons($bdd)
 {
    // 0 : on écrit la requête SQL
-   $reqSQL = 'SELECT * 
-      FROM hackathons
-   ';
+   $reqSQL = 'SELECT * FROM `hackathons` ';
 
    // 1 : on fabrique la requête PHP 
    $reqPHP = $bdd->prepare($reqSQL);
@@ -36,6 +34,48 @@ function selectHackathons($bdd)
    // 4 : on return le résultat
    return $hackathons;
 }
+function selectHackathons2023($bdd)
+{
+   // 0 : on écrit la requête SQL
+   $reqSQL = 'SELECT * FROM `hackathons` WHERE dateDebutHackathon < "2024-01-01 00:00:00" AND dateDebutHackathon > "2023-01-01 00:00:00"';
+   
+
+   // 1 : on fabrique la requête PHP 
+   $reqPHP = $bdd->prepare($reqSQL);
+   $reqPHP->execute();
+   $reqPHP->setFetchMode(PDO::FETCH_CLASS, 'Hackathon');
+
+   // 2 : on récupère les résultats
+   $hackathons = $reqPHP->fetchAll();
+
+   // 3 : on libère les tables de la requête
+   $reqPHP->closeCursor(); // pour finir le traitement
+
+   // 4 : on return le résultat
+   return $hackathons;
+}
+function selectHackathonsToday($bdd)
+{
+   // 0 : on écrit la requête SQL
+   $reqSQL = 'SELECT * FROM `hackathons` WHERE DATE(dateDebutHackathon) = CURDATE()';
+   
+
+   // 1 : on fabrique la requête PHP 
+   $reqPHP = $bdd->prepare($reqSQL);
+   $reqPHP->execute();
+   $reqPHP->setFetchMode(PDO::FETCH_CLASS, 'Hackathon');
+
+   // 2 : on récupère les résultats
+   $hackathons = $reqPHP->fetchAll();
+
+   // 3 : on libère les tables de la requête
+   $reqPHP->closeCursor(); // pour finir le traitement
+
+   // 4 : on return le résultat
+   return $hackathons;
+}
+
+
 
 /* La fonction selectHackathonsAnnee() SELECT tous les hackathons d'une année donnée
  *    et retourne la liste des hackathons

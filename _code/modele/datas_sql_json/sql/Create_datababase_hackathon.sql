@@ -55,14 +55,14 @@ USE HackathonsFW; -- fait rentrer dans la BD Hackathons
 -- Création des tables : d'abord les tables sans clés étrangères
 
 -- Hackathons (id, nom, date_debut)
-CREATE TABLE hackathons(
+CREATE TABLE Hackathons(
 	idHackathon integer auto_increment,     -- auto_increment : numéro automatique
 	nomHackathon varchar(30) not null,      -- not null veut dire obligatoire
 	dateDebutHackathon datetime not null,
 	primary key(idHackathon)
 ) engine innodb;
 
-CREATE TABLE jurys(
+CREATE TABLE Jurys(
 	idJury integer auto_increment,
 	loginJury varchar(30) unique,
 	passwordJury varchar(30), 
@@ -73,7 +73,7 @@ CREATE TABLE jurys(
 	primary key(idJury)
 ) engine innodb;
 
-CREATE TABLE participants(
+CREATE TABLE Participants(
 	idParticipant integer auto_increment,
 	loginParticipant varchar(30) not null unique,
 	passwordParticipant varchar(30) not null, 
@@ -86,7 +86,7 @@ CREATE TABLE participants(
 	primary key(idParticipant)
 ) engine innodb;
 
-CREATE TABLE administrateurs(
+CREATE TABLE Administrateurs(
 	idAdministrateur integer auto_increment,
 	loginAdministrateur varchar(30) not null unique,
 	passwordAdministrateur varchar(30) not null,   
@@ -98,7 +98,7 @@ CREATE TABLE administrateurs(
 
 -- Création des tables : ensuite les tables avec clés étrangères et clé primaire simple
 
-CREATE TABLE equipes(
+CREATE TABLE Equipes(
 	idEquipe integer auto_increment,
 	nomEquipe varchar(20) not null,
 	lienProjetEquipe varchar(20),        -- lien vers le zip de livraison
@@ -109,7 +109,7 @@ CREATE TABLE equipes(
 	primary key(idEquipe)
 ) engine innodb;
 
-CREATE TABLE projets(
+CREATE TABLE Projets(
 	idProjet integer auto_increment,
 	nomProjet varchar(20) not null,
 	descriptionProjet text not null,          -- déscription courte du projet
@@ -121,7 +121,7 @@ CREATE TABLE projets(
 
 -- Création des tables : enfin les tables avec clés étrangères et clé primaire complexe
 
-CREATE TABLE participantshackathons(
+CREATE TABLE ParticipantsHackathons(
 	idParticipant integer,
 	idHackathon integer,
 	idRelatifParticipantHackathon integer not null,
@@ -130,20 +130,20 @@ CREATE TABLE participantshackathons(
 	primary key(idHackathon, idParticipant)
 ) engine innodb;
 
-CREATE TABLE juryshackathons(
+CREATE TABLE JurysHackathons(
 	idJury integer,
 	idHackathon integer,
 	primary key(idJury, idHackathon)
 ) engine innodb;
 
-CREATE TABLE jurysequipes(
+CREATE TABLE JurysEquipes(
 	idJury integer,
 	idEquipe integer,
 	note integer not null,
 	primary key(idJury, idEquipe)
 ) engine innodb;
 
-CREATE TABLE participantsequipes(
+CREATE TABLE ParticipantsEquipes(
 	idParticipant integer,
 	idEquipe integer,
 	primary key(idParticipant, idEquipe)
@@ -170,13 +170,13 @@ CREATE TABLE participantsequipes(
 
 -- Création des lignes = tuples
 
-INSERT INTO hackathons
+INSERT INTO Hackathons
 (idHackathon, nomHackathon, dateDebutHackathon)
 VALUES -- 2 hackathons
 (1, "hackathon_2023_1", "2023-06-01 09:00:00"),
 (2, "hackathon_2023_2", "2023-10-01 09:00:00");
 
-INSERT INTO administrateurs 
+INSERT INTO Administrateurs 
 (
 	idAdministrateur, 
 	loginAdministrateur, passwordAdministrateur,
@@ -190,14 +190,14 @@ VALUES
 	
 );
 
-INSERT INTO jurys 
+INSERT INTO Jurys 
 (idJury, nomJury, prenomJury, mailJury, telephoneJury)
 VALUES -- 3 jurys, 2 par hackathons, le 1 sur les 2 hackathons
 (1, "jury_toto", "p1", "toto@gmail.com", "0607080910"),
 (2, "jury_tata", "p2", "tata@gmail.com", null),
 (3, "jury_titi", "p1", null, null);
 
-INSERT INTO jurys 
+INSERT INTO Jurys 
 (
 	idJury, loginJury, passwordJury, 
 	nomJury, prenomJury, 
@@ -210,7 +210,7 @@ VALUES
 	"nom_root_jury@gmail.com", null
 );
 
-INSERT INTO projets 
+INSERT INTO Projets 
 (idProjet, nomProjet, descriptionProjet, pdfProjet, retenuProjet, idHackathon)
 VALUES -- 4 projets, 2 par hackathon
 (1, "projet 1", "super projet 1", "projet_1.pdf", true, 1),
@@ -219,7 +219,7 @@ VALUES -- 4 projets, 2 par hackathon
 (4, "projet 4", "super projet 4", "projet_4.pdf", true, 2);
 
 
-INSERT INTO juryshackathons
+INSERT INTO JurysHackathons
 (idJury, idHackathon)
 VALUES -- 4 hackathons_jurys, 2 jurys par hackathons, le 1 sur les 2 hackathons
 (1, 1),
@@ -228,7 +228,7 @@ VALUES -- 4 hackathons_jurys, 2 jurys par hackathons, le 1 sur les 2 hackathons
 (3, 2);
 
 -- Participants(idParticipant, nomParticipant, prenomParticipant, mailParticipant, telephoneParticipant, dateDeNaissanceParticipant, lienPorteFolioParticipant)
-INSERT INTO participants 
+INSERT INTO Participants 
 (	idParticipant, 
 	loginParticipant, passwordParticipant, 
 	nomParticipant, prenomParticipant, 
@@ -255,51 +255,78 @@ VALUES
 -- Ajout des clés étrangères
 
 -- 3 relations 1 à plusieurs
-ALTER TABLE projets
+ALTER TABLE Projets
 ADD FOREIGN KEY(idHackathon)
-REFERENCES hackathons(idHackathon);
+REFERENCES Hackathons(idHackathon);
 
-ALTER TABLE equipes
+ALTER TABLE Equipes
 ADD FOREIGN KEY(idProjet)
-REFERENCES projets(idProjet);
+REFERENCES Projets(idProjet);
 
-ALTER TABLE equipes
+ALTER TABLE Equipes
 ADD FOREIGN KEY(idParticipantChef)
-REFERENCES participants(idParticipant);
+REFERENCES Participants(idParticipant);
 
 -- 4 tables de liaison
-ALTER TABLE participantshackathons
+ALTER TABLE ParticipantsHackathons
 ADD FOREIGN KEY(idParticipant)
-REFERENCES participants(idParticipant);
+REFERENCES Participants(idParticipant);
 
-ALTER TABLE participantshackathons
+ALTER TABLE ParticipantsHackathons
 ADD FOREIGN KEY(idHackathon)
-REFERENCES hackathons(idHackathon);
+REFERENCES Hackathons(idHackathon);
 
-ALTER TABLE juryshackathons
-ADD FOREIGN KEY(idJury)
-REFERENCES jurys(idJury);
-
-ALTER TABLE juryshackathons
-ADD FOREIGN KEY(idHackathon)
-REFERENCES hackathons(idHackathon);
-
-ALTER TABLE jurysequipes
+ALTER TABLE JurysHackathons
 ADD FOREIGN KEY(idJury)
 REFERENCES Jurys(idJury);
 
-ALTER TABLE jurysequipes
-ADD FOREIGN KEY(idEquipe)
-REFERENCES equipes(idEquipe);
+ALTER TABLE JurysHackathons
+ADD FOREIGN KEY(idHackathon)
+REFERENCES Hackathons(idHackathon);
 
-ALTER TABLE participantsequipes
+ALTER TABLE JurysEquipes
+ADD FOREIGN KEY(idJury)
+REFERENCES Jurys(idJury);
+
+ALTER TABLE JurysEquipes
+ADD FOREIGN KEY(idEquipe)
+REFERENCES Equipes(idEquipe);
+
+ALTER TABLE ParticipantsEquipes
 ADD FOREIGN KEY(idParticipant)
-REFERENCES participants(idParticipant);
+REFERENCES Participants(idParticipant);
 
-ALTER TABLE participantsequipes
+ALTER TABLE ParticipantsEquipes
 ADD FOREIGN KEY(idEquipe)
-REFERENCES equipes(idEquipe);
+REFERENCES Equipes(idEquipe);
 
 -- -------------------------------------------------------------------------------------------
 -- Consultation des données dans les tables de la BD : SELECT
 -- -------------------------------------------------------------------------------------------
+
+-- On fait un SELECT pour regarder le contenu des tables
+SELECT * FROM Hackathons; 
+SELECT * FROM Participants; 
+SELECT * FROM Jurys; 
+
+SELECT * FROM Projets; 
+SELECT * FROM Equipes; 
+
+SELECT * FROM ParticipantsHackathons;
+SELECT * FROM JurysHackathons;
+SELECT * FROM ParticipantsEquipes;
+SELECT * FROM JurysEquipes;
+
+
+-- On fait un COUNT(*) pour regarder le nombre de tuples des tables
+SELECT count(*) FROM Hackathons; 
+SELECT count(*) FROM Participants; 
+SELECT count(*) FROM Jurys; 
+
+SELECT count(*) FROM Projets; 
+SELECT count(*) FROM Equipes; 
+
+SELECT count(*) FROM ParticipantsHackathons;
+SELECT count(*) FROM JurysHackathons;
+SELECT count(*) FROM ParticipantsEquipes;
+SELECT count(*) FROM JurysEquipes;

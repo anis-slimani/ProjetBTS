@@ -4,7 +4,7 @@
     la variable $copyright est définie dans les pages principales 
 -->
 <ul>
-    <li>bla10</li>
+    <li>bla9</li>
     <li>bla20</li>
 </ul>
 <ol>
