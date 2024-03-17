@@ -49,9 +49,15 @@ if (isset($_POST["insertProjet"])) {
    //        on gère un message d'erreur
 
    // Vérification de base : si on a saisi quelque chose, c'est gon
-   if ($nomProjet != "" && $descriptionProjet != "")
-      $insertProjet = True; // c'est bon on peut inserter
-}
+   if (trim($nomProjet) != "" && trim($descriptionProjet) != "") 
+      $insertProjet = true;
+      debug_ec($insertProjet, "insertProjet");
+  }
+  
+
+
+   
+
 
 // si je viens du modifier du formulaire
 $updateProjet = False;
@@ -100,6 +106,7 @@ if ($insertProjet == True) {
    $resInsertProjet = insertProjet($bdd, $projet);
    debug($resInsertProjet, "resInsertProjet");
 }
+
 // si on vient d'un modifier : 
 else if ($updateProjet == True) {
    $resUpdateProjet = updateProjet($bdd, $idProjet, $projet);

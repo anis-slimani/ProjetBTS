@@ -187,7 +187,7 @@ function insertHackathon($bdd, $hackathon)
    // 0 : reqSQL : version avec ? qui sera passé en dur
    $reqSQL = 'INSERT INTO hackathons (idHackathon, nomHackathon, dateDebutHackathon) 
       VALUES (NULL, :alias_nom, :alias_date_debut)
-   ';
+    ';
    debug($reqSQL, "reqSQL");
    debug($hackathon->getDateDebut(), "getDateDebut");
 

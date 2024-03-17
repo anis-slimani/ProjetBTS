@@ -1,5 +1,5 @@
 body { 
-   background-color: lightyellow;
+   background-color: rgb(182, 182, 182);
    margin : 20px;
 }
 header{
@@ -8,6 +8,8 @@ header{
 }
 header p{
    padding:0px 200px 0px 200px
+   
+   
 }
 
 nav{

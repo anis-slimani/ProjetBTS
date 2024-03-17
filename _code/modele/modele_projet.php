@@ -115,10 +115,13 @@ function selectProjetsDuHackathon($bdd, $idHackathon)
 */
 function insertProjet($bdd, $projet)
 {
+
+
    // 0 : reqSQL : version avec ? qui sera passé en dur
    $reqSQL = 'INSERT INTO projets (idProjet, nomProjet, descriptionProjet, pdfProjet, retenuProjet, idHackathon) 
       VALUES (NULL, :alias_nom, :alias_description, null, 0, null) -- id_hackation à 0 et pas null pour éviter les problèmes
    ';
+   
    debug($reqSQL, "reqSQL");
 
    // 1 :  prepare et debug
