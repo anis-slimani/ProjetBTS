@@ -14,13 +14,13 @@ include("./modele/modele_hackathon.php");
 
 // ---------------------------------------------------------------------------
 // Modèle général SESSION : initialiser la SESSION 
-if(
+if (
    !isset($_SESSION["typeUser"]) // c'est vrai à l'entrée dans le site
-){
-   $_SESSION=array();
-   $_SESSION["typeUser"]="public";
-   $_SESSION["messageErreur"]="";
-   header("Location: "."./_index.php");
+) {
+   $_SESSION = array();
+   $_SESSION["typeUser"] = "public";
+   $_SESSION["messageErreur"] = "";
+   header("Location: " . "./_index.php");
 }
 
 // ---------------------------------------------------------------------------
@@ -60,22 +60,21 @@ if ($okConnexion == True) {
    debug($administrateurConnected, "administrateurConnected");
    debug($juryConnected, "juryConnected");
    debug($participantConnected, "participantConnected");
-   if(
-      ($administrateurConnected != null AND $_SESSION["typeUser"] == "admin") 
-   OR ($juryConnected != null           AND $_SESSION["typeUser"] == "jury")
-   OR ($participantConnected != null    AND $_SESSION["typeUser"] == "participant")
-   ){
+   if (
+      ($administrateurConnected != null and $_SESSION["typeUser"] == "admin")
+      or ($juryConnected != null           and $_SESSION["typeUser"] == "jury")
+      or ($participantConnected != null    and $_SESSION["typeUser"] == "participant")
+   ) {
       // on a un admin et typeUser = admin, il n'y a pas d'erreur
       $_SESSION["messageErreur"] = "";
-   } 
-   else {
+   } else {
       // si on n'a pas d'admin ou si typeUser n'est pas admin : on retourne en typeUser public
       $_SESSION["messageErreur"] = "echec de connexion";
       $_SESSION["typeUser"] = "public";
    }
 }
 if ($okDeconnexion == True) {
-   $_SESSION=array();
+   $_SESSION = array();
    $_SESSION["typeUser"] = "public";
    $_SESSION["messageErreur"] = "";
 }
@@ -86,4 +85,7 @@ $hackathons = selectHackathonsToday($bdd);
 // ---------------------------------------------------------------------------
 debug_get_post();
 debug('<hr>', '<hr>'); // pour séparer les debug de la page html
-include("./views/pages/view_accueil.php");
+if ($_SESSION["typeUser"] == "admin")
+   include("./views/pages/view_accueil_admin.php");
+else
+   include("./views/pages/view_accueil.php");

@@ -1,5 +1,5 @@
 <ul>
-   <li><a href="./ctrl_accueil.php">Accueil participant</a></li>
+   <li><a href="./ctrl_accueil_participant.php">Accueil participant</a></li>
 </ul>
 <div>
    <form action="appel_ctrl_deconnexion.php" method="POST">

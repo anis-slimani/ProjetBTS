@@ -15,4 +15,4 @@ include("./modele/initialisation/tools/connexionDB.php");
 $bdd = connexionDB(); // connexion "automatique" à la BD BD_personnages_armes
 
 // Modèle : définir des variables globales
-$copyright = "moi";
+$copyright = "Anis Slimani";

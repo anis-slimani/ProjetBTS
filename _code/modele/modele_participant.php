@@ -22,6 +22,49 @@ CREATE TABLE Participants(
  *	Sorties : 
  *		$objet : le participant (une seule ligne) : objet
 */
+function selectHackathonsENCours($bdd) 
+
+{
+   // 0 : on écrit la requête SQL
+   $reqSQL = 'SELECT * FROM `hackathons` WHERE DATE(dateDebutHackathon) = CURDATE()';
+   
+
+   // 1 : on fabrique la requête PHP 
+   $reqPHP = $bdd->prepare($reqSQL);
+   $reqPHP->execute();
+   $reqPHP->setFetchMode(PDO::FETCH_CLASS, 'Hackathon');
+
+   // 2 : on récupère les résultats
+   $hackathons = $reqPHP->fetchAll();
+
+   // 3 : on libère les tables de la requête
+   $reqPHP->closeCursor(); // pour finir le traitement
+
+   // 4 : on return le résultat
+   return $hackathons;
+}
+function selectHackathonsFutur($bdd)
+{
+   // 0 : on écrit la requête SQL
+   $reqSQL = 'SELECT * FROM `hackathons` WHERE MONTH(dateDebutHackathon) = MONTH(CURDATE()) AND YEAR(dateDebutHackathon) = YEAR(CURDATE());';
+   
+
+   // 1 : on fabrique la requête PHP 
+   $reqPHP = $bdd->prepare($reqSQL);
+   $reqPHP->execute();
+   $reqPHP->setFetchMode(PDO::FETCH_CLASS, 'Hackathon');
+
+   // 2 : on récupère les résultats
+   $hackathonsfutur = $reqPHP->fetchAll();
+
+   // 3 : on libère les tables de la requête
+   $reqPHP->closeCursor(); // pour finir le traitement
+
+   // 4 : on return le résultat
+   return $hackathonsfutur;
+}
+
+
 function selectParticipantConnected($bdd, $loginParticipant, $passwordParticipant)
 {
    // 0 : on écrit la requête SQL

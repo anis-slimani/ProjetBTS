@@ -10,6 +10,7 @@ include("./modele/initialisation/initialisation.php");
 // Modèle spécifique (pour cette page) : je charge les outils de BD pour mon controleur
 include("./modele/modele_hackathon.php");
 include("./modele/modele_projet.php");
+include("./modele/modele_participant.php");
 
 // ---------------------------------------------------------------------------
 // Modèle spécifique SESSION : initialise la session
@@ -37,7 +38,9 @@ if(
 // cas général
 // on sélectionnera le ou les hackathons en cours
 // et peut-être les projet
-$hackathons = selectHackathonsToday($bdd); 
+$hackathons = selectHackathonsENCours($bdd); 
+$hackathonsfutur = selectHackathonsFutur($bdd); 
+
 
 // ---------------------------------------------------------------------------
 // Vue : afficher les résultats ----------------------------------------------

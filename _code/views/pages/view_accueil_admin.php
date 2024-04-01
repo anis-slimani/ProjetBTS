@@ -23,6 +23,17 @@
 		?>
 	</nav>
 	<main>
+		<?php
+			if ($_SESSION["typeUser"] == "public") {
+				include_once("./views/pages/view_accueil.php");
+			} else if ($_SESSION["typeUser"] == "admin") {
+				include_once("./views/pages/view_accueil_admin.php");
+			} else if ($_SESSION["typeUser"] == "jury") {
+				include_once("./views/pages/view_accueil.php");
+			} else if ($_SESSION["typeUser"] == "participant") {
+				include_once("./views/pages/view_accueil.php");
+			}
+			?>
 		<h2>Accueil : à faire !</h2>
 		<section>
 			<h3>Voici la liste des nouveaux hackathons : incrivez vous !</h2>

@@ -1,5 +1,5 @@
 <ul>
-   <li><a href="./ctrl_accueil.php">Accueil public</a></li>
+   <li><a href="./ctrl_accueil_.php">Accueil public</a></li>
    <li><a href="./ctrl_api.php">API</a></li>
 </ul>
 <div>

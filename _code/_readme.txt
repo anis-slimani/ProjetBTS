@@ -1,3 +1,21 @@
+Installation de départ :
+   Démarrer Wamp (ou Xamp ou autre) :
+      démarrer le serveur web apache
+      démarrer le serveur de BD mysql
+   Charger la BD : modele/datas_sql/sql
+      Par exemple avec avec PHPmyadmin
+   Regarder dans la BD
+      les admin crée
+      les jurys créeles parcipants crée
+      les hackathons, projets crée
+
+      Il éxiste un admin, jury et participant root-root
+      Dans modele/initialisation/tools/connexionsBD.php
+         mettre a jours les variables globals
+         $dbname_global = 'hackathonsFW' ;
+         $username_global = 'root' ;
+         $passeword_global = ' ';
+
 Architecture
    |- _readme.txt
    | 
